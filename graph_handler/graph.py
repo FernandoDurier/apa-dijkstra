@@ -24,42 +24,44 @@ class Graph:
     def addNewVertrix(self,data,connectsTo=[],connectsFrom=[]):
         newVertrix = Vertrix(data)
 
-        if(connectsTo.len > 0):
+        if(len(connectsTo) > 0):
             for i in connectsTo:
-                newVertrix.setNewConnectionTo(connectsTo[i].end)
-                self.edges.append(connectsTo[i])
+                newVertrix.setNewConnectionTo(i.end)
+                self.edges.append(i)
         
-        if(connectsFrom.len > 0):        
+        if(len(connectsFrom) > 0):        
             for j in connectsFrom:
-                newVertrix.setNewConnectionFrom(connectsFrom[i].origin)
-                self.edges.append(connectsFrom[j])
+                newVertrix.setNewConnectionFrom(j.origin)
+                self.edges.append(j)
         
         self.vertrixes.append(newVertrix)
 
     def traverse(self,start,collection):
 
         observed = collection
-        if(collection.len < self.vertrixes.len):
-            if(len(filter (lambda x : x == start, collection)) > 0):
-                print("Already in Collection")
-            else:
-                observed.append(start)
-                print("Node: ",start.data)
-                print("ConnectsTo: ")
-                for i in start.connectsTo:
-                    print("------Edge[",i,"]---------")
-                    print("Origin: ",start.connectsTo[i].origin,"\n")
-                    print("Weigth: ",start.connectsTo[i].weigth,"\n")
-                    print("End: ",start.connectsTo[i].end,"\n")
-                    print("--------------------------")
-                
-                print("ConnectsFrom: ")
-                for j in start.connectsFrom:
-                    print("------Edge[",j,"]---------")
-                    print("Origin: ",start.connectsFrom[j].origin,"\n")
-                    print("Weigth: ",start.connectsFrom[j].weigth,"\n")
-                    print("End: ",start.connectsFrom[j].end,"\n")
-                    print("--------------------------")
+        
+        if(start in collection):
+            print("Already in Collection")
+        else:
+            observed.append(start)
+            print("Node: ",start.getData())
+            print("ConnectsTo: ")
+            for i in start.getNexts():
+                print("------Edge[",i.getData().getOrigin().getData(),">",i.getData().getEnd().getData(),"]---------")
+                print("Origin: ",i.getData().getOrigin().getData(),"\n")
+                print("Weigth: ",i.getData().getWeigth(),"\n")
+                print("End: ",i.getData().getEnd().getData(),"\n")
+                print("--------------------------")
+            
+            print("ConnectsFrom: ")
+            for j in start.getPrevious():
+                print("------Edge[",j.getData().getOrigin().getData(),">",j.getData().getEnd().getData(),"]---------")
+                print("Origin: ",j.getData().getOrigin().getData(),"\n")
+                print("Weigth: ",j.getData().getWeigth(),"\n")
+                print("End: ",j.getData().getEnd().getData(),"\n")
+                print("--------------------------")
+        if(len(start.getNexts())>0):
+            self.traverse(start.getNexts()[0].getData().getEnd(),observed)
         else:
             print("Complete traversion ...")
         

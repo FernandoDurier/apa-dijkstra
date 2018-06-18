@@ -1,19 +1,22 @@
+import sys
+sys.path.append('./ordered_linked_list')
+
 from ordered_linked_list import *
 
 class Vertrix:
     def __init__(self,initdata):
         self.data = initdata
-        #self.connectsto = OrderedList()
-        #self.connectedfrom = OrderedList()
+        self.connectsto = OrderedList()
+        self.connectedfrom = OrderedList()
 
     def getData(self):
         return self.data
 
     def getNexts(self):
-        return self.connectsto
+        return self.connectsto.walk()
     
     def getPrevious(self):
-        return self.connectedfrom
+        return self.connectedfrom.walk()
 
     def setData(self,newdata):
         self.data = newdata

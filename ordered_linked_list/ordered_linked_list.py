@@ -50,5 +50,14 @@ class OrderedList:
 
         return count
     
+    def walk(self):
+        current = self.head
+        array = []
+        while current != None:
+            array.append(current)
+            current = current.getNext()
+
+        return array
+
     
 
