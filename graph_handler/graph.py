@@ -47,23 +47,16 @@ class Graph:
             print("Node: ",start.getData())
             print("ConnectsTo: ")
             for i in start.getNexts():
-                print("------Edge[",i.getData().getOrigin().getData(),">",i.getData().getEnd().getData(),"]---------")
+                print("------Edge[",i.getData().getOrigin().getData(),">",i.getData().getEnd().getData(),"]---------\n")
                 print("Origin: ",i.getData().getOrigin().getData(),"\n")
                 print("Weigth: ",i.getData().getWeigth(),"\n")
                 print("End: ",i.getData().getEnd().getData(),"\n")
-                print("--------------------------")
-            
-            print("ConnectsFrom: ")
-            for j in start.getPrevious():
-                print("------Edge[",j.getData().getOrigin().getData(),">",j.getData().getEnd().getData(),"]---------")
-                print("Origin: ",j.getData().getOrigin().getData(),"\n")
-                print("Weigth: ",j.getData().getWeigth(),"\n")
-                print("End: ",j.getData().getEnd().getData(),"\n")
-                print("--------------------------")
+                print("--------------------------\n")
+                
         if(len(start.getNexts())>0):
             self.traverse(start.getNexts()[0].getData().getEnd(),observed)
         else:
-            print("Complete traversion ...")
+            print("Complete traversion ...\n")
         
 
 
