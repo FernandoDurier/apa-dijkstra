@@ -3,3 +3,5 @@ from ./binheap/heap import *
 from ./logger/timer import *
 from ./dijkstra/closest_path import *
 
+def main():
+    pass
