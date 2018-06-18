@@ -24,7 +24,8 @@ class OrderedList:
         previous = None
         stop = False
         while current != None and not stop:
-            if current.getData() > item:
+            #added getWeigth() as it is the numeric value comparable in our problem
+            if current.getData().getWeigth() > item.getWeigth():
                 stop = True
             else:
                 previous = current

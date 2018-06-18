@@ -26,12 +26,12 @@ class Graph:
 
         if(len(connectsTo) > 0):
             for i in connectsTo:
-                newVertrix.setNewConnectionTo(i.end)
+                newVertrix.setNewConnectionTo(i)
                 self.edges.append(i)
         
         if(len(connectsFrom) > 0):        
             for j in connectsFrom:
-                newVertrix.setNewConnectionFrom(j.origin)
+                newVertrix.setNewConnectionFrom(j)
                 self.edges.append(j)
         
         self.vertrixes.append(newVertrix)
@@ -45,14 +45,12 @@ class Graph:
         else:
             observed.append(start)
             print("Node: ",start.getData())
-            print("ConnectsTo: ")
+            print("Connections: ")
             for i in start.getNexts():
-                print("------Edge[",i.getData().getOrigin().getData(),">",i.getData().getEnd().getData(),"]---------\n")
-                print("Origin: ",i.getData().getOrigin().getData(),"\n")
-                print("Weigth: ",i.getData().getWeigth(),"\n")
-                print("End: ",i.getData().getEnd().getData(),"\n")
-                print("--------------------------\n")
-                
+                print("Edge:{[",i.getData().getOrigin().getData(),"]-(",i.getData().getWeigth(),")->[",i.getData().getEnd().getData(),"]}\n")
+                print()
+            print("--------------------------\n")
+
         if(len(start.getNexts())>0):
             self.traverse(start.getNexts()[0].getData().getEnd(),observed)
         else:
