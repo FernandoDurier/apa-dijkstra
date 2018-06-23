@@ -16,26 +16,31 @@ class Graph:
     def getEdges(self):
         return self.edges
 
-    # This function adds a new vertrix and a new edge to the graph
-    # data is the value of the new vertrix 
-    # connectsTo is an array of edges that shows the connection between the new vertrix and outcoming ones
-    # connectsFrom is an array of edges tht shows the connection between the new vertrix and incoming others
-
+    ##
+    # @description this function adds a new vertrix to the graph structure
+    # @param {String/Number} data is the value of the vertrix
+    # @param {Array<Edge>} connectsTo is an array of edges to which the vertrix is connected to 
+    # @param {Array<Edge>} connectsFrom is an array of edges from which the vertrix connects from
+    # # 
     def addNewVertrix(self,data,connectsTo=[],connectsFrom=[]):
         newVertrix = Vertrix(data)
 
-        if(len(connectsTo) > 0):
-            for i in connectsTo:
-                newVertrix.setNewConnectionTo(i)
-                self.edges.append(i)
-        
-        if(len(connectsFrom) > 0):        
-            for j in connectsFrom:
-                newVertrix.setNewConnectionFrom(j)
-                self.edges.append(j)
+        for i in connectsTo:
+            newVertrix.setNewConnectionTo(i)
+            self.edges.append(i)
+               
+        for j in connectsFrom:
+            newVertrix.setNewConnectionFrom(j)
+            self.edges.append(j)
         
         self.vertrixes.append(newVertrix)
 
+
+    ## 
+    # @description this function traverses the graph structure using recursion as algorithimic strategy
+    # @param{Vertrix} start is the entrypoint of our graph traversion, and then will be next vertrix
+    # @param{Array<Vertrix>} collection is the set of traversed vertrixes
+    # #
     def traverse(self,start,collection):
 
         observed = collection

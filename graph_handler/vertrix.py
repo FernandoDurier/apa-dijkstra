@@ -1,7 +1,8 @@
 import sys
-sys.path.append('./ordered_linked_list')
+sys.path.append('./')
 
 from ordered_linked_list import *
+from graph_handler.edge import *
 
 class Vertrix:
     def __init__(self,initdata):
@@ -21,8 +22,16 @@ class Vertrix:
     def setData(self,newdata):
         self.data = newdata
 
+    ## 
+    # @description This function adds a new edge to an ordered list of connected to edges 
+    # @param {Edge} newnext is a new edge to which the vertrix is connected to
+    # #
     def setNewConnectionTo(self,newnext):
         self.connectsto.add(newnext)
     
+    # #
+    # @description This function adds a new edge to an ordered list of connected from edges 
+    # @parma {Edge} newprevious is a new edge to which the vertrix is connected from 
+    # #
     def setNewConnectionFrom(self,newprevious):
         self.connectedfrom.add(newprevious)
