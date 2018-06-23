@@ -1,3 +1,4 @@
+[Back to Home](./)
 # This is the Graph Manager Module of the Project
 
 * Each vertrix in its topology has an ordered adjacence list of connections to and from other edges that will eventually connecto to other vertrixes. 
