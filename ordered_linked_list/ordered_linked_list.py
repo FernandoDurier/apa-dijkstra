@@ -1,4 +1,4 @@
-from node import * 
+from .node import * 
 
 class OrderedList:
     def __init__(self):
@@ -55,7 +55,7 @@ class OrderedList:
         current = self.head
         array = []
         while current != None:
-            array.append(current)
+            array.append(current.getData())
             current = current.getNext()
 
         return array

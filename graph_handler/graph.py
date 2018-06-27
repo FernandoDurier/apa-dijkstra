@@ -1,5 +1,5 @@
-from edge import *
-from vertrix import *
+from .edge import *
+from .vertrix import *
 
 class Graph:
     def __init__(self,entry):
@@ -16,24 +16,25 @@ class Graph:
     def getEdges(self):
         return self.edges
 
+
+    def addVertrix(self,vertrix):
+        if vertrix in self.vertrixes:
+            pass
+        else: 
+            self.vertrixes.append(vertrix)
+
     ##
     # @description this function adds a new vertrix to the graph structure
     # @param {String/Number} data is the value of the vertrix
     # @param {Array<Edge>} connectsTo is an array of edges to which the vertrix is connected to 
-    # @param {Array<Edge>} connectsFrom is an array of edges from which the vertrix connects from
     # # 
-    def addNewVertrix(self,data,connectsTo=[],connectsFrom=[]):
-        newVertrix = Vertrix(data)
-
-        for i in connectsTo:
-            newVertrix.setNewConnectionTo(i)
-            self.edges.append(i)
-               
-        for j in connectsFrom:
-            newVertrix.setNewConnectionFrom(j)
-            self.edges.append(j)
-        
-        self.vertrixes.append(newVertrix)
+    def addNewConnection(self,origin,distance,end):
+        #print("edge to be added: [",origin.getData(),"]-(",distance,")->[",end.getData(),"]")
+        newEdge = Edge(origin,end,distance)
+        self.edges.append(newEdge)
+        origin.setNewConnectionTo(newEdge)
+        self.addVertrix(origin)
+        self.addVertrix(end)
 
 
     ## 

@@ -5,24 +5,21 @@ from edge import *
 entry = Vertrix(0)
 v1 = Vertrix(1)
 v2 = Vertrix(2)
+
 g1 = Graph(entry)
 
-e1 = Edge(entry,v1,1)
-e2 = Edge(v1,v2,1)
-e3 = Edge(v1,v2,3)
-e4 = Edge(v1,v2,2)
+g1.addNewConnection(entry,1,v1)
+g1.addNewConnection(v1,1,v2)
+g1.addNewConnection(v1,2,v2)
+g1.addNewConnection(v1,3,v2)
 
-entry.setNewConnectionTo(e1)
-v1.setNewConnectionTo(e2)
-v1.setNewConnectionTo(e3)
-v1.setNewConnectionTo(e4)
+print("Adjacence List: ")
+for v in g1.getVertrixes():
+    connections = v.getNexts()
+    beautifulCon = []
+    for c in connections:
+        beauty = "["+str(c.getOrigin().getData())+","+str(c.getWeigth())+","+str(c.getEnd().getData())+"]->"
+        beautifulCon.append(beauty)
+    print("[",v.getData(),"] = ", beautifulCon)
 
-v1.setNewConnectionFrom(e1)
-v2.setNewConnectionFrom(e2)
-v2.setNewConnectionFrom(e3)
-v2.setNewConnectionFrom(e4)
-
-g1.addNewVertrix(v1,[],[e1])
-g1.addNewVertrix(v2,[e2,e3,e4],[])
-
-g1.traverse(entry,[])
+#g1.traverse(entry,[])
