@@ -16,7 +16,7 @@ class Edge:
     def setWeigth(self,newweigth):
         self.weigth = newweigth
     
-    def setOrigin(self,newweigth):
+    def setOrigin(self,neworigin):
         self.origin = neworigin
 
     def setEnd(self,newend):
