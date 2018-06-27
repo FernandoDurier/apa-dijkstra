@@ -60,5 +60,7 @@ class OrderedList:
 
         return array
 
+    def getHead(self):
+        return self.head
     
 

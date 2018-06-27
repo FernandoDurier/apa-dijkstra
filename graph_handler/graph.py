@@ -1,27 +1,28 @@
-from .edge import *
-from .vertrix import *
+from edge import *
+from vertrix import *
 
 class Graph:
     def __init__(self,entry):
         self.entry = Vertrix(entry)
-        self.vertrixes = [entry]
-        self.edges = []
+        self.representation = {} #dictionary of ordered linked lists, adjacent row access complexity to O(1)*O(n) | n=size of each adjacence list
 
     def getEntry(self):
         return self.entry
 
     def getVertrixes(self):
-        return self.vertrixes
+        return self.representation.keys()
     
     def getEdges(self):
-        return self.edges
-
+        edges = list()
+        for k in self.representation.keys():
+            edges.append(self.representation[int(k)]['v'].getNexts())
+        return edges
 
     def addVertrix(self,vertrix):
-        if vertrix in self.vertrixes:
+        if vertrix.getData() in self.representation.keys():
             pass
         else: 
-            self.vertrixes.append(vertrix)
+            self.representation[vertrix.getData()] = { 'v':vertrix , 'n':vertrix.getHead() }
 
     ##
     # @description this function adds a new vertrix to the graph structure
@@ -31,36 +32,19 @@ class Graph:
     def addNewConnection(self,origin,distance,end):
         #print("edge to be added: [",origin.getData(),"]-(",distance,")->[",end.getData(),"]")
         newEdge = Edge(origin,end,distance)
-        self.edges.append(newEdge)
-        origin.setNewConnectionTo(newEdge)
-        self.addVertrix(origin)
-        self.addVertrix(end)
 
+        if origin not in self.representation.keys():
+            self.addVertrix(origin)
 
-    ## 
-    # @description this function traverses the graph structure using recursion as algorithimic strategy
-    # @param{Vertrix} start is the entrypoint of our graph traversion, and then will be next vertrix
-    # @param{Array<Vertrix>} collection is the set of traversed vertrixes
-    # #
-    def traverse(self,start,collection):
-
-        observed = collection
+        self.representation[origin.getData()]['v'].setNewConnectionTo(newEdge)
         
-        if(start in collection):
-            print("Already in Collection")
-        else:
-            observed.append(start)
-            print("Node: ",start.getData())
-            print("Connections: ")
-            for i in start.getNexts():
-                print("Edge:{[",i.getData().getOrigin().getData(),"]-(",i.getData().getWeigth(),")->[",i.getData().getEnd().getData(),"]}\n")
-                print()
-            print("--------------------------\n")
+        if end not in self.representation.keys():
+            self.addVertrix(end)
+    
+    def getRepresentation(self):
+        return self.representation
 
-        if(len(start.getNexts())>0):
-            self.traverse(start.getNexts()[0].getData().getEnd(),observed)
-        else:
-            print("Complete traversion ...\n")
+
         
 
 

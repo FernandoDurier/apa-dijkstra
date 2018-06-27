@@ -17,6 +17,9 @@ class Vertrix:
 
     def setData(self,newdata):
         self.data = newdata
+    
+    def getHead(self):
+        return self.connectsto.getHead()
 
     ## 
     # @description This function adds a new edge to an ordered list of connected to edges 

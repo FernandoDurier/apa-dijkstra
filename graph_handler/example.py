@@ -13,13 +13,16 @@ g1.addNewConnection(v1,1,v2)
 g1.addNewConnection(v1,2,v2)
 g1.addNewConnection(v1,3,v2)
 
+print("G= ", g1.getVertrixes())
+print("E= ", g1.getEdges)
 print("Adjacence List: ")
-for v in g1.getVertrixes():
-    connections = v.getNexts()
+grepresentation = g1.getRepresentation()
+for v in grepresentation:
+    connections = grepresentation[v]['v'].getNexts()
     beautifulCon = []
     for c in connections:
-        beauty = "["+str(c.getOrigin().getData())+","+str(c.getWeigth())+","+str(c.getEnd().getData())+"]->"
+        beauty = "["+str(c.getOrigin().getData())+","+str(c.getWeigth())+","+str(c.getEnd().getData())+"]"
         beautifulCon.append(beauty)
-    print("[",v.getData(),"] = ", beautifulCon)
+    print("[",grepresentation[v]['v'].getData(),"] = ", beautifulCon)
 
 #g1.traverse(entry,[])
