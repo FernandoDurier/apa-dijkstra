@@ -9,7 +9,7 @@ from data_loader.data_loader import *
 def main():
 
     dl = Data_Loader()
-
+    t = Timer()
     set1 = dl.loadData('./data/case1.csv')
     set2 = dl.loadData('./data/case2.csv')
     set3 = dl.loadData('./data/case3.csv')
@@ -30,6 +30,8 @@ def main():
         g4.addNewConnection(Vertrix(tup[0]),tup[2],Vertrix(tup[1]))
  
     chosenGraph = g3
+    t.set_timer_start()
+
     print("-----------------------------------------------------------------------------------------------------")
     print(" Adjacence List: ")
     grepresentation = chosenGraph.getRepresentation()
@@ -40,8 +42,14 @@ def main():
             beauty = "["+str(c.getOrigin().getData())+","+str(c.getWeigth())+","+str(c.getEnd().getData())+"]"
             beautifulCon.append(beauty)
         print("  [",grepresentation[v]['v'].getData(),"] = ", beautifulCon)
+    
+    for i in range(1000):
+        print("#######################Execution Numer ", i," #############################")
+        print(Dijkstra(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None))
+        print("###########################################################################")
+    t.set_timer_end()
 
-    print(Dijkstra(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None))
+    print("Time spent in miliseconds: ", t.get_timer_difference())
     
 
 main()

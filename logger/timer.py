@@ -8,10 +8,10 @@ class Timer:
         self.DIFFERENCE = self.END - self.START
 
     def set_timer_start(self):
-        self.START = time.time()
+        self.START = int(round(time.time()*1000))
     
     def set_timer_end(self):
-        self.END = time.time()
+        self.END = int(round(time.time()*1000))
 
     def get_timer_start(self):
         return self.START
@@ -20,4 +20,4 @@ class Timer:
         return self.END
     
     def get_timer_difference(self):
-        return self.DIFFERENCE
+        return self.END - self.START
