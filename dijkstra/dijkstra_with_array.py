@@ -75,8 +75,8 @@ def DijkstraArray(G,start,end=None):
             if w.getEnd().getData() in D:
                 if vwLength < D[w.getEnd.getData()]:
                     raise str(ValueError) + " Dijkstra: found better path to already-final vertex"
-            elif w.getEnd().getData() not in Q or vwLength < Q[w.getEnd().getData()]:
-                Q[w.getEnd().getData()] = vwLength
+            elif int(w.getEnd().getData()) not in Q or vwLength < Q[int(w.getEnd().getData())]:
+                Q[int(w.getEnd().getData())] = vwLength
                 P[w.getEnd().getData()] = vet
             # print("     P(predecessors): ", P)
 

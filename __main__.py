@@ -58,14 +58,5 @@ def main():
         t.set_timer_end()
         print("Dijkstra with Priority Queue Execution Result: ", executionResult)
         print("Time spent in miliseconds: ", t.get_timer_difference())
-        t2.set_timer_start()
-        for j in range(1000):
-            #print("#######################Execution Number ", i," #############################")
-            executionResultArray = DijkstraArray(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None)
-            #print("###########################################################################")
-        t2.set_timer_end()
-        print("Dijkstra with Array Execution Result: ", executionResultArray)
-        print("Time spent in miliseconds: ", t2.get_timer_difference())
-    
 
 main()
