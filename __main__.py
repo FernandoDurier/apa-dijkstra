@@ -5,7 +5,7 @@ from graph_handler.vertrix import *
 from graph_handler.graph import *
 from dijkstra.closest_path import *
 from data_loader.data_loader import *
-from dijkstra.dijkstra_with_array import *
+
 
 def main():
 
@@ -56,7 +56,9 @@ def main():
             executionResult = Dijkstra(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None)
             #print("###########################################################################")
         t.set_timer_end()
-        print("Dijkstra with Priority Queue Execution Result: ", executionResult)
+        print("------------------------------------------------------------")
+        print("Dijkstra Result: \n ", executionResult)
+        print("------------------------------------------------------------")
         print("Time spent in miliseconds: ", t.get_timer_difference())
-
+print("----------------------------------------------------------------------")
 main()
