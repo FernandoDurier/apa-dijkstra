@@ -1,5 +1,5 @@
-from edge import *
-from vertrix import *
+from .edge import *
+from .vertrix import *
 
 class Graph:
     def __init__(self,entry):
@@ -37,6 +37,7 @@ class Graph:
             self.addVertrix(origin)
 
         self.representation[origin.getData()]['v'].setNewConnectionTo(newEdge)
+        self.representation[origin.getData()]['n'] = self.representation[origin.getData()]['v'].getNexts()
         
         if end not in self.representation.keys():
             self.addVertrix(end)
