@@ -5,11 +5,13 @@ from graph_handler.vertrix import *
 from graph_handler.graph import *
 from dijkstra.closest_path import *
 from data_loader.data_loader import *
+from dijkstra.dijkstra_with_array import *
 
 def main():
 
     dl = Data_Loader()
     t = Timer()
+    t2 = Timer()
     set1 = dl.loadData('./data/case1.csv')
     set2 = dl.loadData('./data/case2.csv')
     set3 = dl.loadData('./data/case3.csv')
@@ -50,12 +52,20 @@ def main():
         
         executionResult = {}
         for i in range(1000):
-            #print("#######################Execution Numer ", i," #############################")
+            #print("#######################Execution Number ", i," #############################")
             executionResult = Dijkstra(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None)
             #print("###########################################################################")
         t.set_timer_end()
-        print("Dijkstra Execution Result: ", executionResult)
+        print("Dijkstra with Priority Queue Execution Result: ", executionResult)
         print("Time spent in miliseconds: ", t.get_timer_difference())
+        t2.set_timer_start()
+        for j in range(1000):
+            #print("#######################Execution Number ", i," #############################")
+            executionResultArray = DijkstraArray(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None)
+            #print("###########################################################################")
+        t2.set_timer_end()
+        print("Dijkstra with Array Execution Result: ", executionResultArray)
+        print("Time spent in miliseconds: ", t2.get_timer_difference())
     
 
 main()
