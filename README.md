@@ -9,6 +9,6 @@
 # Testing this project:
 1. Download Python in [this link](https://www.python.org/downloads/)
 2. Download this project either by git or by download button in green up here in this page
-3. In your terminal (Open Windows Start Menu, search for cmd or git bash) from the root folder run `python ./__main__.py`
+3. In your terminal (Open Windows Start Menu, search for cmd or git bash) from the root folder of this project run `python ./__main__.py`
 4. Check the results ...
 
