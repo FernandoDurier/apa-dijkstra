@@ -29,9 +29,9 @@ def main():
     for tup in set4:
         g4.addNewConnection(Vertrix(tup[0]),tup[2],Vertrix(tup[1]))
  
-    chosenGraph = g4
-
-    print("Adjacence List: ")
+    chosenGraph = g3
+    print("-----------------------------------------------------------------------------------------------------")
+    print(" Adjacence List: ")
     grepresentation = chosenGraph.getRepresentation()
     for v in grepresentation:
         connections = grepresentation[v]['v'].getNexts()
@@ -39,7 +39,7 @@ def main():
         for c in connections:
             beauty = "["+str(c.getOrigin().getData())+","+str(c.getWeigth())+","+str(c.getEnd().getData())+"]"
             beautifulCon.append(beauty)
-        print("[",grepresentation[v]['v'].getData(),"] = ", beautifulCon)
+        print("  [",grepresentation[v]['v'].getData(),"] = ", beautifulCon)
 
     print(Dijkstra(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None))
     

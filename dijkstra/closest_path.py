@@ -52,28 +52,32 @@ def Dijkstra(G,start,end=None):
     P = {}	# dictionary of predecessors
     Q = priorityDictionary()   # est.dist. of non-final vert.
     Q[0] = 0
-    print("Q: ", Q)
-    print("End: ", end)
+    print("------------------------------------Dijkstra-Execution----------------------------------------")
+    print("   Q(heapbin): ", Q)
+    print("   End(supposed): ", end)
 
     for vet in Q:
         print("--------------------------------------------------------------------------------------------")
-        print("Vet: ", vet)
+        print("    Vet(next to be tested): ", vet)
         D[vet] = Q[vet]
-        
+        if G[str(vet)]['n'] == None:
+            print("Dead End ... ")
+            break
         if vet == end: 
             print("End")
             break
+        
         for w in G[str(vet)]['n']:
-            print("w: [",w.getOrigin().getData(),",",w.getWeigth(),",",w.getEnd().getData(),"]")
+            print("     W(edge): [",w.getOrigin().getData(),",",w.getWeigth(),",",w.getEnd().getData(),"]")
             vwLength = D[vet] + int(w.getWeigth())
-            print("D: ", D)
-            print("Q: ", Q)
+            print("     D(final distances): ", D)
+            print("     Q(heapbin): ", Q)
             if w.getEnd().getData() in D:
                 if vwLength < D[w.getEnd.getData()]:
                     raise str(ValueError) + " Dijkstra: found better path to already-final vertex"
             elif w.getEnd().getData() not in Q or vwLength < Q[w.getEnd().getData()]:
                 Q[w.getEnd().getData()] = vwLength
                 P[w.getEnd().getData()] = vet
-            print("P: ", P)
+            print("     P(predecessors): ", P)
 
-    return (D,P)
+    return {"distances":D,"predecessors":P}
