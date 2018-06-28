@@ -29,27 +29,33 @@ def main():
     for tup in set4:
         g4.addNewConnection(Vertrix(tup[0]),tup[2],Vertrix(tup[1]))
  
-    chosenGraph = g3
-    t.set_timer_start()
-
-    print("-----------------------------------------------------------------------------------------------------")
-    print(" Adjacence List: ")
-    grepresentation = chosenGraph.getRepresentation()
-    for v in grepresentation:
-        connections = grepresentation[v]['v'].getNexts()
-        beautifulCon = []
-        for c in connections:
-            beauty = "["+str(c.getOrigin().getData())+","+str(c.getWeigth())+","+str(c.getEnd().getData())+"]"
-            beautifulCon.append(beauty)
-        print("  [",grepresentation[v]['v'].getData(),"] = ", beautifulCon)
-    
-    for i in range(1000):
-        print("#######################Execution Numer ", i," #############################")
-        print(Dijkstra(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None))
-        print("###########################################################################")
-    t.set_timer_end()
-
-    print("Time spent in miliseconds: ", t.get_timer_difference())
+    graphs = [g1,g2,g3,g4]
+    graphsLabels = ['g1','g2','g3','g4']
+    for g in graphs:
+        label = graphs.index(g)
+        print("-----------------------------------------------------------------------------------------------------")
+        print("Output graph: ", graphsLabels[label])
+        chosenGraph = g
+        t.set_timer_start()
+        print("-----------------------------------------------------------------------------------------------------")
+        print(" Adjacence List: ")
+        grepresentation = chosenGraph.getRepresentation()
+        for v in grepresentation:
+            connections = grepresentation[v]['v'].getNexts()
+            beautifulCon = []
+            for c in connections:
+                beauty = "["+str(c.getOrigin().getData())+","+str(c.getWeigth())+","+str(c.getEnd().getData())+"]"
+                beautifulCon.append(beauty)
+            print("  [",grepresentation[v]['v'].getData(),"] = ", beautifulCon)
+        
+        executionResult = {}
+        for i in range(1000):
+            #print("#######################Execution Numer ", i," #############################")
+            executionResult = Dijkstra(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None)
+            #print("###########################################################################")
+        t.set_timer_end()
+        print("Dijkstra Execution Result: ", executionResult)
+        print("Time spent in miliseconds: ", t.get_timer_difference())
     
 
 main()
