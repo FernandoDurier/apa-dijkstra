@@ -52,9 +52,9 @@ def main():
         
         executionResult = {}
         for i in range(1000):
-            #print("#######################Execution Number ", i," #############################")
+            print("#######################Execution Number ", i," #############################")
             executionResult = Dijkstra(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None)
-            #print("###########################################################################")
+            print("###########################################################################")
         t.set_timer_end()
         print("------------------------------------------------------------")
         print("Dijkstra Result: ")
