@@ -21,7 +21,7 @@ class steinlibParser:
                 if(edge and ("End" in line.strip())):
                     end = True
 
-                if( "E " in line.strip()):
+                if( not end and "E " in line.strip()):
                     cnt += 1
                     ed = line.strip().split()
 
