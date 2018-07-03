@@ -12,10 +12,7 @@ def main():
     dl = Data_Loader()
     t = Timer()
     t2 = Timer()
-    set1 = dl.loadData('./data/case1.csv')
-    set2 = dl.loadData('./data/case2.csv')
-    set3 = dl.loadData('./data/case3.csv')
-    set4 = dl.loadData('./data/case4.csv')
+    graphSet = dl.loadData('./data')
 
     g1 = Graph(Vertrix(int(set1[0][0])))
     g2 = Graph(Vertrix(int(set2[0][0])))

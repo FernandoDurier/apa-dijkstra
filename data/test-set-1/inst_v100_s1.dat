@@ -1,7 +1,6 @@
 NB_NODES 		 100
 NB_ARCS  		 9900
-LIST_OF_ARCS 	 COSTS 
-head tail cost
+LIST_OF_ARCS 	 COSTS
 1 	 0 	 5 
 0 	 1 	 5 
 2 	 0 	 4 
