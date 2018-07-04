@@ -3,8 +3,9 @@ class steinlibParser:
         pass
 
     def graphParserByEdges(self, path, beginString, endString, bidirectional):
-       print("Path from graphParserByEdges: ", path)
+       #print("Path from graphParserByEdges: ", path)
        graphStruct = {
+           "path":path,
            "entry":[],
            "nodes":[],
            "edges":[]

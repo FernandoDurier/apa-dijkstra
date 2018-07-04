@@ -3,8 +3,9 @@ class datGraphParser:
         pass
 
     def graphParserByArcs(self, path, beginString, endString, bidirectional):
-       print("Path from graph parser by arcs: ", path)
+       #print("Path from graph parser by arcs: ", path)
        graphStruct = {
+           "path":path,
            "entry":[],
            "nodes":[],
            "edges":[]
@@ -14,7 +15,7 @@ class datGraphParser:
             cnt = 0
             edge = False
             end = False
-            print(line)
+            #print(line)
             while line:
                 
                 if("LIST_OF_ARCS" in line.strip()):

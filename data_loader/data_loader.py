@@ -1,7 +1,7 @@
 import sys
-from datGraphParser import *
-from steinlibparser import *
-from graphPathFinder import *
+from .datGraphParser import *
+from .steinlibparser import *
+from .graphPathFinder import *
 
 class Data_Loader:
     def __init__(self):

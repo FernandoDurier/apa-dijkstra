@@ -2,9 +2,11 @@ from .edge import *
 from .vertrix import *
 
 class Graph:
-    def __init__(self,entry):
+    def __init__(self,entry,label):
         self.entry = Vertrix(entry)
-        self.representation = {} #dictionary of ordered linked lists, adjacent row access complexity to O(1)*O(n) | n=size of each adjacence list
+        self.representation = {
+            'label':label
+        } #dictionary of ordered linked lists, adjacent row access complexity to O(1)*O(n) | n=size of each adjacence list
 
     def getEntry(self):
         return self.entry
