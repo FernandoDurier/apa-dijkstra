@@ -4,7 +4,6 @@
 # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/117228
 
 from .priodict import priorityDictionary
-from .heap import *
 
 def Dijkstra(G,start,end=None):
     """
@@ -97,7 +96,7 @@ def Dijkstra(G,start,end=None):
             if prioDictIndex in D:
                 if vwLength < D[prioDictIndex]:
                     raise str(ValueError) + " Dijkstra: found better path to already-final vertex"
-                    
+
             elif prioDictIndex not in Q or vwLength < Q[prioDictIndex]:
                 Q[prioDictIndex] = vwLength
                 P[prioDictIndex] = vet

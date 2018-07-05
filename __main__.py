@@ -4,6 +4,7 @@ from graph_handler.edge import *
 from graph_handler.vertrix import *
 from graph_handler.graph import *
 from dijkstra.closest_path import *
+from dijkstra.closest_path_using_array import *
 from data_loader.data_loader import *
 import json
 import ntpath
@@ -15,7 +16,7 @@ def main():
     dl = Data_Loader()
     t = Timer()
     t2 = Timer()
-    graphSet = dl.loadData('./data')
+    graphSet = dl.loadData('./problematic-data')
 
     for i in graphSet:
         g = Graph(Vertrix(i['entry']),i['name'],i['path'])
@@ -39,7 +40,8 @@ def main():
             #print("  [",grepresentation['struct'][v]['v'].getData(),"] = ", beautifulCon)
         
         executionResult = {}
-        executionResult = Dijkstra(chosenGraph.getRepresentation()['struct'],chosenGraph.getEntry().getData(),None)
+        #executionResult = Dijkstra(chosenGraph.getRepresentation()['struct'],chosenGraph.getEntry().getData(),None)
+        executionResult = DijkstraArray(chosenGraph.getRepresentation()['struct'],chosenGraph.getEntry().getData(),None)
         t.set_timer_end()
         # print("------------------------------------------------------------")
         # print("Dijkstra Result: ")
@@ -50,7 +52,8 @@ def main():
         # print("distances set: ", executionResult['distances'])
         # print("predecessors set: ", executionResult['predecessors'])
         report = {}
-        report["strategy"] = "binheap priority queue"
+        report["strategy"] = "using array"
+        #report["strategy"] = "binheap priority queue"
         report["instance"] = grepresentation['label']
         report["number_of_nodes"] = len(chosenGraph.getVertrixes())
         report["number_of_edges"] = chosenGraph.getQuantityOfEdges()
