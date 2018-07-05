@@ -63,4 +63,7 @@ class OrderedList:
     def getHead(self):
         return self.head
     
+    def walkOneByOne(self, currentItem):
+        return currentItem
+    
 

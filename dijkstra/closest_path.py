@@ -2,7 +2,9 @@
 # David Eppstein, UC Irvine, 4 April 2002
 
 # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/117228
+
 from .priodict import priorityDictionary
+from .heap import *
 
 def Dijkstra(G,start,end=None):
     """
@@ -51,33 +53,60 @@ def Dijkstra(G,start,end=None):
     D = {}	# dictionary of final distances
     P = {}	# dictionary of predecessors
     Q = priorityDictionary()   # est.dist. of non-final vert.
-    Q[0] = 0
-    print("------------------------------------Dijkstra-Execution----------------------------------------")
-    print("   Q(heapbin): ", Q)
-    print("   End(supposed): ", end)
-
+    Q[int(start.getData())] = 0
+    #print("------------------------------------Dijkstra-Execution----------------------------------------")
+    #print("   Q(heapbin): ", Q)
+    #print("   End(supposed): ", end)
+    #print("   G: ", G)
     for vet in Q:
-        print("--------------------------------------------------------------------------------------------")
-        print("    Vet(next to be tested): ", vet)
+        #print("--------------------------------------------------------------------------------------------")
+        #print("    Vet(next to be tested): ", vet)
         D[vet] = Q[vet]
-        if G[str(vet)]['n'] == None:
-            print("Dead End ... ")
-            break
+        #if G[vet]['n'] == None:
+            #print("Dead End ... ")
+            #break
         if vet == end: 
-            print("End")
+            #print("End")
             break
         
-        for w in G[str(vet)]['n']:
-            print("     W(edge): [",w.getOrigin().getData(),",",w.getWeigth(),",",w.getEnd().getData(),"]")
+        # for w in G[vet]['n']:
+        #     #print("     W(edge): [",w.getOrigin().getData(),",",w.getWeigth(),",",w.getEnd().getData(),"]")
+        #     vwLength = D[vet] + int(w.getWeigth())
+        #     #print("     D(final distances): ", D)
+        #     #print("     Q(heapbin): ", Q)
+        #     if w.getEnd().getData() in D:
+        #         if vwLength < D[w.getEnd.getData()]:
+        #             raise str(ValueError) + " Dijkstra: found better path to already-final vertex"
+        #     elif w.getEnd().getData() not in Q or vwLength < Q[w.getEnd().getData()]:
+        #         Q[w.getEnd().getData()] = vwLength
+        #         P[w.getEnd().getData()] = vet
+        #     #print("     P(predecessors): ", P)
+        #print("Vertrix: ", G[vet]['v'])
+        link = G[vet]['v'].getHead()
+        while link != None :
+            #print("linked link: ", link)
+            w = link.getData()
+            #print("w: ", w)
+            #print("     W(edge): [",w.getOrigin().getData(),",",w.getWeigth(),",",w.getEnd().getData(),"]")
             vwLength = D[vet] + int(w.getWeigth())
-            print("     D(final distances): ", D)
-            print("     Q(heapbin): ", Q)
-            if w.getEnd().getData() in D:
-                if vwLength < D[w.getEnd.getData()]:
+            #print("     D(final distances): ", D)
+            #print("     Q(heapbin): ", Q)
+            endOfEdge = w.getEnd()
+            prioDictIndex = endOfEdge.getData()
+
+            if prioDictIndex in D:
+                if vwLength < D[prioDictIndex]:
                     raise str(ValueError) + " Dijkstra: found better path to already-final vertex"
-            elif w.getEnd().getData() not in Q or vwLength < Q[w.getEnd().getData()]:
-                Q[w.getEnd().getData()] = vwLength
-                P[w.getEnd().getData()] = vet
-            print("     P(predecessors): ", P)
+                    
+            elif prioDictIndex not in Q or vwLength < Q[prioDictIndex]:
+                Q[prioDictIndex] = vwLength
+                P[prioDictIndex] = vet
+            
+            if(link.getNext()):
+                link = link.getNext()
+            else:
+                break
+            #print("     P(predecessors): ", P)
+
 
     return {"distances":D,"predecessors":P}

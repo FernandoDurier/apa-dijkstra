@@ -2,9 +2,11 @@ class datGraphParser:
     def __init__(self):
         pass
 
-    def graphParserByArcs(self, path, beginString, endString, bidirectional):
-       print("Path from graph parser by arcs: ", path)
+    def graphParserByArcs(self, path, name, beginString, endString, bidirectional):
+       #print("Path from graph parser by arcs: ", path)
        graphStruct = {
+           "name":name,
+           "path":path,
            "entry":[],
            "nodes":[],
            "edges":[]
@@ -14,7 +16,7 @@ class datGraphParser:
             cnt = 0
             edge = False
             end = False
-            print(line)
+            #print(line)
             while line:
                 
                 if("LIST_OF_ARCS" in line.strip()):
@@ -26,9 +28,9 @@ class datGraphParser:
                 if( edge and not end):
                     cnt += 1
                     ed = line.strip().split()
-
+                    #print("ed:", ed)
                     if(cnt == 1): 
-                        graphStruct['entry'] = 0
+                        graphStruct['entry'] = ed[1]
 
                     if(int(ed[1]) not in graphStruct['nodes']):
                         graphStruct['nodes'].append(int(ed[1]))
@@ -44,10 +46,11 @@ class datGraphParser:
                         graphStruct['edges'].append(reverseEdge)
 
                 if(end):
+                    
                     return graphStruct
 
                 line = fp.readline()
     
-    def graphDatParser(self, path, bidirectional):
-        return self.graphParserByArcs(path, "", "", bidirectional)
+    def graphDatParser(self, path, name, bidirectional):
+        return self.graphParserByArcs(path, name, "", "", bidirectional)
 

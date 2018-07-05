@@ -5,59 +5,67 @@ from graph_handler.vertrix import *
 from graph_handler.graph import *
 from dijkstra.closest_path import *
 from data_loader.data_loader import *
-
+import json
+import ntpath
+import gc
 
 def main():
 
+    graphs = []
     dl = Data_Loader()
     t = Timer()
     t2 = Timer()
     graphSet = dl.loadData('./data')
 
-    g1 = Graph(Vertrix(int(set1[0][0])))
-    g2 = Graph(Vertrix(int(set2[0][0])))
-    g3 = Graph(Vertrix(int(set3[0][0])))
-    g4 = Graph(Vertrix(int(set4[0][0])))
-
-    for tup in set1:
-        g1.addNewConnection(Vertrix(tup[0]),tup[2],Vertrix(tup[1]))
-    for tup in set2:
-        g2.addNewConnection(Vertrix(tup[0]),tup[2],Vertrix(tup[1]))
-    for tup in set3:
-        g3.addNewConnection(Vertrix(tup[0]),tup[2],Vertrix(tup[1]))
-    for tup in set4:
-        g4.addNewConnection(Vertrix(tup[0]),tup[2],Vertrix(tup[1]))
- 
-    graphs = [g1,g2,g3,g4]
-    graphsLabels = ['g1','g2','g3','g4']
-    for g in graphs:
-        label = graphs.index(g)
+    for i in graphSet:
+        g = Graph(Vertrix(i['entry']),i['name'],i['path'])
+        for tup in i['edges']:
+            #print("Edge: ", tup)
+            g.addNewConnection(Vertrix(tup['origin']),tup['weigth'],Vertrix(tup['end']))
+    
         print("-----------------------------------------------------------------------------------------------------")
-        print("Output graph: ", graphsLabels[label])
         chosenGraph = g
         t.set_timer_start()
         print("-----------------------------------------------------------------------------------------------------")
-        print(" Adjacence List: ")
+        #print(" Adjacence List: ")
         grepresentation = chosenGraph.getRepresentation()
-        for v in grepresentation:
-            connections = grepresentation[v]['v'].getNexts()
-            beautifulCon = []
-            for c in connections:
-                beauty = "["+str(c.getOrigin().getData())+","+str(c.getWeigth())+","+str(c.getEnd().getData())+"]"
-                beautifulCon.append(beauty)
-            print("  [",grepresentation[v]['v'].getData(),"] = ", beautifulCon)
+        #print(grepresentation)
+        # for v in grepresentation['struct']:
+        #     connections = grepresentation['struct'][v]['v'].getNexts()
+        #     beautifulCon = []
+        #     for c in connections:
+        #         beauty = "["+str(c.getOrigin().getData())+","+str(c.getWeigth())+","+str(c.getEnd().getData())+"]"
+        #         beautifulCon.append(beauty)
+            #print("  [",grepresentation['struct'][v]['v'].getData(),"] = ", beautifulCon)
         
         executionResult = {}
-        for i in range(1000):
-            print("#######################Execution Number ", i," #############################")
-            executionResult = Dijkstra(chosenGraph.getRepresentation(),chosenGraph.getEntry(),None)
-            print("###########################################################################")
+        executionResult = Dijkstra(chosenGraph.getRepresentation()['struct'],chosenGraph.getEntry().getData(),None)
         t.set_timer_end()
-        print("------------------------------------------------------------")
-        print("Dijkstra Result: ")
-        print("distances set: ", executionResult['distances'])
-        print("predecessors set: ", executionResult['predecessors'])
-        print("------------------------------------------------------------")
-        print("Time spent in miliseconds: ", t.get_timer_difference())
-print("----------------------------------------------------------------------")
+        # print("------------------------------------------------------------")
+        # print("Dijkstra Result: ")
+        # print("Graph Analysed: ", chosenGraph['label'])
+        # print("Number of Nodes: ", len(chosenGraph.getEdges()))
+        # print("Number of Edges: ", len(chosenGraph.getVertrixes()))
+        # print("Time spent in miliseconds: ", t.get_timer_difference())
+        # print("distances set: ", executionResult['distances'])
+        # print("predecessors set: ", executionResult['predecessors'])
+        report = {}
+        report["strategy"] = "binheap priority queue"
+        report["instance"] = grepresentation['label']
+        report["number_of_nodes"] = len(chosenGraph.getVertrixes())
+        report["number_of_edges"] = chosenGraph.getQuantityOfEdges()
+        report["time_spent_in_miliseconds"] = t.get_timer_difference()
+        start = chosenGraph.getEntry()
+        report["origin_node"] = start.getData().getData()
+        report["distance_from_origin_to_each_node"] = executionResult['distances']
+        report["predecessors_set"] = executionResult['predecessors']
+        #print("Report: ")
+        #print(report)
+        reportName = grepresentation['label'].replace("\\","-")
+        with open('./reports/'+reportName+'report.txt', 'w') as file:
+            for key, value in report.items():
+                file.write('%s:%s\n' % (key, value))
+            print("Completed Report for ", reportName)
+        gc.collect()
+
 main()

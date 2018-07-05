@@ -2,9 +2,11 @@ class steinlibParser:
     def __init__(self):
         pass
 
-    def graphParserByEdges(self, path, beginString, endString, bidirectional):
-       print("Path from graphParserByEdges: ", path)
+    def graphParserByEdges(self, path, name, beginString, endString, bidirectional):
+       #print("Path from graphParserByEdges: ", path)
        graphStruct = {
+           "name":name,
+           "path":path,
            "entry":[],
            "nodes":[],
            "edges":[]
@@ -21,10 +23,10 @@ class steinlibParser:
                 if(edge and ("End" in line.strip())):
                     end = True
 
-                if( "E " in line.strip()):
+                if( not end and "E " in line.strip()):
                     cnt += 1
                     ed = line.strip().split()
-
+                    #print("ed: ", ed)
                     if(cnt == 1): 
                         graphStruct['entry'] = ed[1]
 
@@ -46,6 +48,6 @@ class steinlibParser:
 
                 line = fp.readline()
     
-    def graphParser(self, path, bidirectional):
-        return self.graphParserByEdges(path, "", "", bidirectional)
+    def graphParser(self, path, name, bidirectional):
+        return self.graphParserByEdges(path, name, "", "", bidirectional)
 
